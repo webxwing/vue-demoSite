@@ -11,7 +11,7 @@ var express = require('express')
 var webpack = require('webpack')
 var proxyMiddleware = require('http-proxy-middleware')
 var webpackConfig = require('./webpack.dev.conf')
-
+var mockDb = require('../db.json');
 // default port where dev server listens for incoming traffic
 var port = process.env.PORT || config.dev.port
 // automatically open browser, if not set will be false
@@ -21,6 +21,20 @@ var autoOpenBrowser = !!config.dev.autoOpenBrowser
 var proxyTable = config.dev.proxyTable
 
 var app = express()
+
+//mock数据
+var apiRouter = express.Router();
+apiRouter.post('/getNewsList',function(req,res) {
+  res.json(mockDb.getNewsList);
+});
+apiRouter.post('/login',function(req,res) {
+  res.json(mockDb.login);
+});
+apiRouter.post('/getOrderList',function(req,res){
+  res.json(mockDb.getOrderList)
+})
+app.use('/api',apiRouter);
+
 var compiler = webpack(webpackConfig)
 
 var devMiddleware = require('webpack-dev-middleware')(compiler, {

@@ -24,6 +24,7 @@
       </div>
     </div>
     <div class="index-right">
+      <slide :slides="slides"></slide>
       <div class="index-board-list">
         <div class="index-board-item" v-for="(item,index) in boardList"
              :class="[{ 'line-last':index % 2 !== 0},'index-board-'+item.id]">
@@ -41,6 +42,7 @@
 </template>
 <script>
   import ax from 'axios'
+  import slide from '@/components/Slide'
   export default {
     created: function () {
       ax.post('/api/getNewsList')
@@ -49,7 +51,11 @@
         })
         .catch((error) => {
           //this.$router.push('/error');
+          console.log('数据获取失败！')
         })
+    },
+    components:{
+      slide
     },
     data() {
       return {

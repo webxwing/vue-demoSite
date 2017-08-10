@@ -6,11 +6,11 @@
 
         <div class="head-nav">
           <ul class="nav-list">
-            <li>登录</li>
+            <li @click="showDialog('loginIsShow')">登录</li>
             <li class="nav-pile">|</li>
-            <li>注册</li>
+            <li @click="showDialog('regIsShow')">注册</li>
             <li class="nav-pile">|</li>
-            <li>帮助</li>
+            <li @click="showDialog('helpIsShow')">帮助</li>
           </ul>
         </div>
       </div>
@@ -21,10 +21,39 @@
     <div class="app-foot">
       <p>2017 demo.ioc MIT</p>
     </div>
+    <MyDialog  :isShow="loginIsShow" @on-close = "closeDialog('loginIsShow')">
+      <p>login</p>
+    </MyDialog>
+    <MyDialog  :isShow="regIsShow" @on-close = "closeDialog('regIsShow')">
+      <p>regIsShow</p>
+    </MyDialog>
+    <MyDialog :isShow="helpIsShow" @on-close = "closeDialog('helpIsShow')">
+      <p>helpIsShow</p>
+    </MyDialog>
   </div>
 </template>
 <script>
-  export default {}
+  import Dialog from "./Dialog.vue"
+  export default {
+    data (){
+      return {
+        loginIsShow : false,
+        regIsShow : false,
+        helpIsShow : false
+      }
+    },
+    methods: {
+      closeDialog (tagIsShow) {
+        this[tagIsShow] = false ;
+      },
+      showDialog(tagIsShow){
+        this[tagIsShow] = true ;
+      }
+    },
+    components:{
+      MyDialog : Dialog
+    }
+  }
 </script>
 <style>
   a {

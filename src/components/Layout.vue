@@ -22,18 +22,19 @@
       <p>2017 demo.ioc MIT</p>
     </div>
     <MyDialog  :isShow="loginIsShow" @on-close = "closeDialog('loginIsShow')">
-      <p>login</p>
+      <login-form></login-form>
     </MyDialog>
     <MyDialog  :isShow="regIsShow" @on-close = "closeDialog('regIsShow')">
       <p>regIsShow</p>
     </MyDialog>
     <MyDialog :isShow="helpIsShow" @on-close = "closeDialog('helpIsShow')">
-      <p>helpIsShow</p>
+      <p>本报告在调研数据的基础上，采用定性与定量相结合的方式深入分析了专车市场发展的驱动因素与阻碍因素、专车市场背后的产业格局、专车企业的竞争格局、用户对专车市场的依赖程度、专车对其他交通工具运力的补充效应等，通过这五个章节的研究反映专车市场的发展态势和面临的问题。报告力求客观、深入、准确地反映中国专车市场发展情况，为政府、企事业单位和社会各界提供决策依据。</p>
     </MyDialog>
   </div>
 </template>
 <script>
-  import Dialog from "./Dialog.vue"
+  import Dialog from "./Dialog"
+  import LoginForm from "./LoginForm"
   export default {
     data (){
       return {
@@ -51,7 +52,8 @@
       }
     },
     components:{
-      MyDialog : Dialog
+      MyDialog : Dialog,
+      LoginForm
     }
   }
 </script>
